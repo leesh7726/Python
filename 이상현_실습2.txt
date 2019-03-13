@@ -1,0 +1,49 @@
+## 두수를 입력뱓아서 사칙 연산을 수행할 수 있는 계산기를 구현하시오.
+
+n1 = int(input("첫번째 수 입력"))
+n2 = int(input("두번째 수 입력"))
+
+print(n1, " + ", n2, " = ", n1+n2)
+print(n1, " - ", n2, " = ", n1-n2)
+print(n1, " * ", n2, " = ", n1*n2)
+print(n1, " / ", n2, " = ", n1/n2)
+
+
+
+
+
+## * 제공된 seoul.csv를 사용하여 기상 관측 이래 가장 추웠던 날은 몇도 인지 확인하시오.
+## - 코드 구현 및 그래프 출력(plot또는 hist)
+import numpy as np
+import pandas as pd
+
+df = pd.read_csv("seoul.csv", encoding='utf-8')
+data = np.array(df)
+
+
+for row in data:
+    if float(row[3]) == float(df['최저기온(℃)'].min()) :
+        print("날짜 : " , row[0], "최저기온 : ", row[3])
+
+
+
+########################################################################
+########################################################################
+# 최저기온 그래프출력
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc
+font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
+rc('font', family=font_name)
+
+df = pd.read_csv("seoul.csv", encoding='utf-8')
+
+del df['지점']
+del df['평균기온(℃)']
+del df['최고기온(℃)']
+
+df.set_index('날짜', inplace=True)
+df.head(10).plot(kind='barh')

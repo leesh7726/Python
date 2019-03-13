@@ -1,0 +1,15 @@
+--* 제공되어진 VideoShop.sql를 이용하여 다음의 결과를 처리할 수 있는 식을 작성하시오.
+use VideoShop
+
+--- 특정테이프에 대해서 테이프 번호, 테이프 제목, 배급사를 보고 싶으나 그 테이프 제목이 ‘사랑’으로 시작된다는 것만 알고 있다. 적절한 SQL 문을 작성하시오. 
+select T.TAPE_NO, T.NAME, T.DISTRIBUTOR from VS_TAPE as T where T.NAME like '사랑%'
+
+--- 테이프 중에서 대여료가 1500원에서 3000원 사이의 비디오테이프는 어떤 것인가? 적절한 SQL문으로 작성하시오.
+select T.NAME, T.PRICE from VS_TAPE as T where T.PRICE BETWEEN 1500 AND 3000
+
+--- '홍길동' 고객에게 테이프를 대여한 횟수(미반납 포함)을 알고 싶다. 적절한 SQL문을 작성하시오. 
+select count(*) from VS_CUSTOMER as C Inner join VS_RENT R on C.CUST_ID = R.CUST_ID where C.NAME = '홍길동'
+
+--- 우수 고객을 선정하기 위해 현재까지 대여 횟수가 5번 이상인 고객의 ID와 고객 이름을 보고 싶다. 적절한 SQL문을 작성하시오.
+select C.NAME, count(*) as count from VS_CUSTOMER as C Inner join VS_RENT R on C.CUST_ID = R.CUST_ID group by C.NAME having count(*) >= 5
+
